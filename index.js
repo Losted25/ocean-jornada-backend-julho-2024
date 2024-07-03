@@ -15,6 +15,7 @@ const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
 
 // Read All - [GET] /item
 app.get('/item', function (req, res) {
+
   // Pegamos a lista e enviamos como resposta HTTP
   res.send(lista)
 })
@@ -23,8 +24,14 @@ app.use(express.json())
 
 // Create - [Post] /item
 app.post('/item', function (req, res){
-  console.log(req.body)
-  res.send('Create')
+
+//Obtemos o nome enviado no Request Body
+  const item = req.body.nome 
+
+//Inserimos o item no final da lista
+  lista.push(item)
+
+  res.send('Item criado com sucesso')
 })
 
 app.listen(3000)
