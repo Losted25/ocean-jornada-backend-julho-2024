@@ -45,5 +45,20 @@ app.get('/item/:id', function(req, res){
   res.send(item)
 })
 
+//Update - [PUT] /item/:id
+app.put('/item/:id', function (req, res){
+  
+  //Acessamos o ID parâmetro de rota  
+  const id = req.params.id
+
+  //Acessamos o body de requisição, com os dados
+  // a serem atualizados
+  const novoItem = req.body.nome
+
+  //Atualizamos esse novoItem na lista, usando o índice
+  lista[id - 1] = novoItem
+
+  res.send('Item atualizado com sucesso: ' + id)
+})
 
 app.listen(3000)
