@@ -24,11 +24,17 @@ app.get('/oi', function (req, res) {
 // Lista de Personagens
 const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
 
-// Read All - [GET] /item
-app.get('/item', function (req, res) {
+const db = client.db(dbName)
+const collection = db.collection('item')
 
-  // Pegamos a lista e enviamos como resposta HTTP
-  res.send(lista)
+
+// Read All - [GET] /item
+app.get('/item', async function (req, res) {
+  //Obter todos os documentos da collection
+  const documentos = await collection.find().toArray()
+
+  // Pegamos os documentos e enviamos como resposta HTTP
+  res.send(documentos)
 })
 //Sinalizamos para o Express que vamos usar o JSON no Body
 app.use(express.json())
