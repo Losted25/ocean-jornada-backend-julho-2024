@@ -1,5 +1,16 @@
 const express = require('express')
+const { MongoClient } = require('mongodb')
 const app = express()
+
+const dbUrl = 'mongodb+srv://admin:a1tVT4AZpXE2S0sc@cluster0.pm4p9aw.mongodb.net/'
+const dbName = 'ocean-jornada-backend'
+
+const client = new MongoClient(dbUrl)
+
+async function main() {
+console.log('Conectando ao banco de dados')
+client.connect()
+console.log('Banco de dados conectado com sucesso!')
 
 app.get('/', function (req, res) {
   res.send('Hello World')
@@ -62,3 +73,5 @@ app.put('/item/:id', function (req, res){
 })
 
 app.listen(3000)
+}
+main()
