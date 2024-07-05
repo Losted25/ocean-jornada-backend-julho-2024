@@ -36,19 +36,21 @@ app.get('/item', async function (req, res) {
   // Pegamos os documentos e enviamos como resposta HTTP
   res.send(documentos)
 })
+
 //Sinalizamos para o Express que vamos usar o JSON no Body
 app.use(express.json())
 
 // Create - [Post] /item
-app.post('/item', function (req, res){
+app.post('/item', async function (req, res){
 
-//Obtemos o nome enviado no Request Body
-  const item = req.body.nome 
+  //Obtemos o objeto inteiro no Request Body
+  const item = req.body
 
-//Inserimos o item no final da lista
-  lista.push(item)
+  //Inserimos o item na collection
+  await collection.insertOne(item)
 
-  res.send('Item criado com sucesso')
+  //Exibe o item que foi adicionado
+  res.send(item)
 })
 
 //Read by Id - [Get] /item/:id
